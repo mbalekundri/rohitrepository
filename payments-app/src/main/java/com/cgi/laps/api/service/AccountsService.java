@@ -1,4 +1,4 @@
-package com.cgi.laps.demo.service;
+package com.cgi.laps.api.service;
 
 import java.util.List;
 
@@ -7,12 +7,12 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cgi.laps.demo.dto.ServerResponse;
-import com.cgi.laps.demo.exception.BadRequestException;
-import com.cgi.laps.demo.exception.DuplicateRequestException;
-import com.cgi.laps.demo.exception.RecordNotFoundException;
-import com.cgi.laps.demo.model.CustomerAccount;
-import com.cgi.laps.demo.repository.CustomerAccountDAO;
+import com.cgi.laps.api.dto.ServerResponse;
+import com.cgi.laps.api.exception.BadRequestException;
+import com.cgi.laps.api.exception.DuplicateRequestException;
+import com.cgi.laps.api.exception.RecordNotFoundException;
+import com.cgi.laps.api.model.CustomerAccount;
+import com.cgi.laps.api.repository.CustomerAccountDAO;
 
 import lombok.Getter;
 

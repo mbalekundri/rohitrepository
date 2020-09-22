@@ -19,7 +19,7 @@
 		<java.version>1.8</java.version>
 		<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
 		<jacoco.version>0.8.2</jacoco.version>
-		<start-class>com.cgi.laps.demo.SpringBootPaymentsApp</start-class>
+		<start-class>com.cgi.laps.api.SpringBootPaymentsApp</start-class>
 	</properties>
 	<dependencies>
 		<dependency>

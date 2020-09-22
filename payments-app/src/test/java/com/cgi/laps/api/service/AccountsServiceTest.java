@@ -1,4 +1,4 @@
-package com.cgi.laps.demo.service;
+package com.cgi.laps.api.service;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -6,15 +6,16 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+
+import com.cgi.laps.api.dto.ServerResponse;
+import com.cgi.laps.api.exception.BadRequestException;
+import com.cgi.laps.api.exception.DuplicateRequestException;
+import com.cgi.laps.api.model.CustomerAccount;
+import com.cgi.laps.api.repository.CustomerAccountDAO;
+
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-
-import com.cgi.laps.demo.dto.ServerResponse;
-import com.cgi.laps.demo.exception.BadRequestException;
-import com.cgi.laps.demo.exception.DuplicateRequestException;
-import com.cgi.laps.demo.model.CustomerAccount;
-import com.cgi.laps.demo.repository.CustomerAccountDAO;
 
 /**
  * @author balekundrim

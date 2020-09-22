@@ -1,4 +1,4 @@
-package com.cgi.laps.demo.repository;
+package com.cgi.laps.api.repository;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,11 +14,11 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import com.cgi.laps.demo.dto.ServerResponse;
-import com.cgi.laps.demo.exception.BadRequestException;
-import com.cgi.laps.demo.exception.DuplicateRequestException;
-import com.cgi.laps.demo.model.CustomerAccount;
-import com.cgi.laps.demo.model.TransactionResult;
+import com.cgi.laps.api.dto.ServerResponse;
+import com.cgi.laps.api.exception.BadRequestException;
+import com.cgi.laps.api.exception.DuplicateRequestException;
+import com.cgi.laps.api.model.CustomerAccount;
+import com.cgi.laps.api.model.TransactionResult;
 
 /**
  * CustomerAccountDAO.java: A DAO class to handle service calls to create update

@@ -1,4 +1,4 @@
-package com.cgi.laps.demo.web;
+package com.cgi.laps.api.web;
 
 import java.util.List;
 
@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cgi.laps.demo.dto.ServerResponse;
-import com.cgi.laps.demo.exception.BadRequestException;
-import com.cgi.laps.demo.exception.DuplicateRequestException;
-import com.cgi.laps.demo.exception.RecordNotFoundException;
-import com.cgi.laps.demo.model.CustomerAccount;
-import com.cgi.laps.demo.service.AccountsService;
+import com.cgi.laps.api.dto.ServerResponse;
+import com.cgi.laps.api.exception.BadRequestException;
+import com.cgi.laps.api.exception.DuplicateRequestException;
+import com.cgi.laps.api.exception.RecordNotFoundException;
+import com.cgi.laps.api.model.CustomerAccount;
+import com.cgi.laps.api.service.AccountsService;
 
 import lombok.Getter;
 

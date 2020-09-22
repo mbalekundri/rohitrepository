@@ -1,4 +1,4 @@
-package com.cgi.laps.demo.model;
+package com.cgi.laps.api.model;
 
 /**
  * TransactionResult.java: An Enum, which returns SUCCESS/FAILURE during

@@ -1,9 +1,9 @@
-package com.cgi.laps.demo.dto;
+package com.cgi.laps.api.dto;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.cgi.laps.demo.model.TransactionResult;
+import com.cgi.laps.api.model.TransactionResult;
 
 /**
  * ServerResponse.java: To show status and detailed message after create/update

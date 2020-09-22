@@ -1,4 +1,4 @@
-package com.cgi.laps.demo.repository;
+package com.cgi.laps.api.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

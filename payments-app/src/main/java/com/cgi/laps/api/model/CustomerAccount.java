@@ -1,11 +1,11 @@
-package com.cgi.laps.demo.model;
+package com.cgi.laps.api.model;
 
 import java.io.Serializable;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.cgi.laps.demo.exception.BadRequestException;
+import com.cgi.laps.api.exception.BadRequestException;
 
 /**
  * CustomerAccount.java: A model class to store customer account information
