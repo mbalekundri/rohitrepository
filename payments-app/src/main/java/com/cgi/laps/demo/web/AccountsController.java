@@ -24,6 +24,8 @@ import com.cgi.laps.demo.exception.RecordNotFoundException;
 import com.cgi.laps.demo.model.CustomerAccount;
 import com.cgi.laps.demo.service.AccountsService;
 
+import lombok.Getter;
+
 /**
  * AccountsController.java: A rest controller class to manage customer account
  * create, update operations
@@ -38,7 +40,8 @@ public class AccountsController {
 	private static final Logger LOGGER = LogManager.getLogger(AccountsController.class);
 
 	@Autowired
-	AccountsService accountsService;
+	@Getter
+	private AccountsService accountsService;
 
 	/**
 	 * Find customer account details by accountID
@@ -48,11 +51,10 @@ public class AccountsController {
 	 * @throws RecordNotFoundException
 	 */
 	@GetMapping("/{accountID}")
-	public ResponseEntity<CustomerAccount> getAccountByAccNo(@PathVariable("accountID") String accountID)
+	public ResponseEntity<CustomerAccount> getAccountByAccNo(@PathVariable("accountID") Long accountID)
 			throws RecordNotFoundException {
-		CustomerAccount entity = accountsService.getAccountByAccNo(accountID);
-		LOGGER.debug(" getAccountByAccNo: " + accountID);
-		LOGGER.debug(" getAccountByAccNo: " + entity.toString());
+		CustomerAccount entity = getAccountsService().getAccountByAccNo(accountID);
+		LOGGER.debug("Success: Retrieve of CustomerAccount: " + entity.toString());
 		return new ResponseEntity<CustomerAccount>(entity, new HttpHeaders(), HttpStatus.OK);
 	}
 
@@ -63,7 +65,7 @@ public class AccountsController {
 	 */
 	@GetMapping
 	public ResponseEntity<List<CustomerAccount>> getAllAccountsDetails() {
-		List<CustomerAccount> list = accountsService.getAllAccountsDetails();
+		List<CustomerAccount> list = getAccountsService().getAllAccountsDetails();
 		LOGGER.debug(" getAllAccountsDetails: Objects returned: " + list.size());
 		return new ResponseEntity<List<CustomerAccount>>(list, new HttpHeaders(), HttpStatus.OK);
 	}
@@ -79,7 +81,7 @@ public class AccountsController {
 	@PostMapping
 	public ResponseEntity<ServerResponse> createOrUpdateCustomerAccount(@RequestBody CustomerAccount account)
 			throws BadRequestException, DuplicateRequestException {
-		ServerResponse updatedResult = accountsService.createOrUpdateCustomerAccount(account);
+		ServerResponse updatedResult = getAccountsService().createOrUpdateCustomerAccount(account);
 		LOGGER.debug(" createOrUpdateCustomerAccount: returned: " + updatedResult);
 		return new ResponseEntity<ServerResponse>(updatedResult, new HttpHeaders(), HttpStatus.CREATED);
 	}
@@ -93,10 +95,10 @@ public class AccountsController {
 	 * @throws BadRequestException
 	 */
 	@PutMapping
-	public ResponseEntity<ServerResponse> updateCustomerAccount(@RequestParam("accountID") String accountID,
+	public ResponseEntity<ServerResponse> updateCustomerAccount(@RequestParam("accountID") Long accountID,
 			@RequestParam("updateAmt") Double updateAmt) throws BadRequestException {
 		LOGGER.debug(" updateCustomerAccount: called: accountID: " + accountID + " updateAmt " + updateAmt);
-		ServerResponse result = accountsService.updateCustomerAccount(accountID, updateAmt);
+		ServerResponse result = getAccountsService().updateCustomerAccount(accountID, updateAmt);
 		LOGGER.debug(" updateCustomerAccount: returned: " + result);
 		return new ResponseEntity<ServerResponse>(result, new HttpHeaders(), HttpStatus.OK);
 	}

@@ -27,21 +27,27 @@ import com.cgi.laps.demo.model.TransactionResult;
  * @author balekundrim
  *
  */
-@Component
-public class CustomerAccountDAO {
+@Component(value = "customerAccountDAO")
+public final class CustomerAccountDAO {
 
 	private static final Logger LOGGER = LogManager.getLogger(CustomerAccountDAO.class);
 
-	private Map<String, CustomerAccount> customerAccounts;
+	private Map<Long, CustomerAccount> customerAccounts;
 
-	private static final String ADMIN_ACC_ID = "173627";
+	private static final Long ADMIN_ACC_ID = 173627l;
+	
+	
+	public CustomerAccountDAO() {
+		super();
+		createDefaultAccount();
+	}
 
 	/**
 	 * Getter for customerAccounts
 	 * 
 	 * @return
 	 */
-	public Map<String, CustomerAccount> getCustomerAccounts() {
+	public Map<Long, CustomerAccount> getCustomerAccounts() {
 		if (customerAccounts == null) {
 			customerAccounts = Collections.synchronizedMap(new HashMap<>());
 		}
@@ -55,9 +61,12 @@ public class CustomerAccountDAO {
 	 * @throws BadRequestException,
 	 *             DuplicateRequestException
 	 */
-	@PostConstruct
-	public void createDefaultAccount() throws BadRequestException, DuplicateRequestException {
-		this.createCustomerAccount(ADMIN_ACC_ID, "Rohit M Balekundri", 25000d);
+	public void createDefaultAccount()  {
+		try {
+			this.createCustomerAccount(ADMIN_ACC_ID, "Rohit M Balekundri", 25000d);
+		} catch (BadRequestException | DuplicateRequestException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -65,7 +74,7 @@ public class CustomerAccountDAO {
 	 * 
 	 * @param customerAccounts
 	 */
-	public void setCustomerAccounts(Map<String, CustomerAccount> customerAccounts) {
+	public void setCustomerAccounts(Map<Long, CustomerAccount> customerAccounts) {
 		this.customerAccounts = customerAccounts;
 	}
 
@@ -81,7 +90,7 @@ public class CustomerAccountDAO {
 	 * @throws BadRequestException,
 	 *             DuplicateRequestException
 	 */
-	public ServerResponse createCustomerAccount(String accountID, String customerName, Double initialCredit)
+	public ServerResponse createCustomerAccount(Long accountID, String customerName, Double initialCredit)
 			throws BadRequestException, DuplicateRequestException {
 		ServerResponse response = null;
 		if (!StringUtils.isEmpty(customerName)) {
@@ -126,7 +135,7 @@ public class CustomerAccountDAO {
 	 * @param accountID
 	 * @return
 	 */
-	public CustomerAccount getCustomerAccountDetails(String accountID) {
+	public CustomerAccount getCustomerAccountDetails(Long accountID) {
 		return (CustomerAccount) this.getCustomerAccounts().get(accountID);
 	}
 
@@ -136,13 +145,10 @@ public class CustomerAccountDAO {
 	 * @return
 	 */
 	public List<CustomerAccount> getAllAccountsDetails() {
-		Iterator<String> itrKeys = getCustomerAccounts().keySet().iterator();
+		Iterator<Long> itrKeys = getCustomerAccounts().keySet().iterator();
 		List<CustomerAccount> allAccounts = new ArrayList<>();
-		// Using synchronized block is advisable
-		synchronized (customerAccounts) {
-			while (itrKeys.hasNext()) {
-				allAccounts.add(customerAccounts.get(itrKeys.next()));
-			}
+		while (itrKeys.hasNext()) {
+			allAccounts.add(customerAccounts.get(itrKeys.next()));
 		}
 		return allAccounts;
 	}
@@ -155,7 +161,7 @@ public class CustomerAccountDAO {
 	 * @return serverResponse
 	 * @throws BadRequestException
 	 */
-	public ServerResponse updateCustomerAccount(String accountID, Double balanceChange) throws BadRequestException {
+	public ServerResponse updateCustomerAccount(Long accountID, Double balanceChange) throws BadRequestException {
 		CustomerAccount account = (CustomerAccount) this.getCustomerAccounts().get(accountID);
 		ServerResponse serverResponse = new ServerResponse();
 		if (account == null) {

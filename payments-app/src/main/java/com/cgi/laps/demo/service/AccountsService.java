@@ -14,6 +14,8 @@ import com.cgi.laps.demo.exception.RecordNotFoundException;
 import com.cgi.laps.demo.model.CustomerAccount;
 import com.cgi.laps.demo.repository.CustomerAccountDAO;
 
+import lombok.Getter;
+
 /**
  * AccountsService.java: A service class to handle create update operation calls
  * from controller class
@@ -22,12 +24,13 @@ import com.cgi.laps.demo.repository.CustomerAccountDAO;
  *
  */
 @Service
-public class AccountsService {
+public final class AccountsService {
 
 	private static final Logger LOGGER = LogManager.getLogger(AccountsService.class);
 
 	@Autowired
-	CustomerAccountDAO customerAccountDAO;
+	@Getter
+	private CustomerAccountDAO customerAccountDAO;
 
 	/**
 	 * Get given accountID related account information
@@ -36,8 +39,8 @@ public class AccountsService {
 	 * @return
 	 * @throws RecordNotFoundException
 	 */
-	public CustomerAccount getAccountByAccNo(String accountID) throws RecordNotFoundException {
-		CustomerAccount account = customerAccountDAO.getCustomerAccountDetails(accountID);
+	public CustomerAccount getAccountByAccNo(Long accountID) throws RecordNotFoundException {
+		CustomerAccount account = getCustomerAccountDAO().getCustomerAccountDetails(accountID);
 
 		if (account == null) {
 			LOGGER.error("No customer account exist for input accountID " + accountID);
@@ -46,8 +49,12 @@ public class AccountsService {
 		return account;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public List<CustomerAccount> getAllAccountsDetails() {
-		return customerAccountDAO.getAllAccountsDetails();
+		return getCustomerAccountDAO().getAllAccountsDetails();
 
 	}
 
@@ -60,7 +67,7 @@ public class AccountsService {
 	 */
 	public ServerResponse createOrUpdateCustomerAccount(CustomerAccount account)
 			throws BadRequestException, DuplicateRequestException {
-		ServerResponse result = customerAccountDAO.createCustomerAccount(account.getAccountID(),
+		ServerResponse result = getCustomerAccountDAO().createCustomerAccount(account.getAccountID(),
 				account.getCustomerName(), account.getInitialCredit());
 		LOGGER.debug(account.toString() + " updated result " + result);
 		return result;
@@ -74,8 +81,8 @@ public class AccountsService {
 	 * @return serverResponse
 	 * @throws BadRequestException
 	 */
-	public ServerResponse updateCustomerAccount(String accountID, Double updateAmt) throws BadRequestException {
-		return customerAccountDAO.updateCustomerAccount(accountID, updateAmt);
+	public ServerResponse updateCustomerAccount(Long accountID, Double updateAmt) throws BadRequestException {
+		return getCustomerAccountDAO().updateCustomerAccount(accountID, updateAmt);
 	}
 
 }

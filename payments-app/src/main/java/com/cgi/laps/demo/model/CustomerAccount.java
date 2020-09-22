@@ -19,7 +19,7 @@ public class CustomerAccount implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private String accountID;
+	private Long accountID;
 	private String customerName;
 	private Double initialCredit = 0d;
 	private Double accountBalance = 0d;
@@ -28,23 +28,23 @@ public class CustomerAccount implements Serializable {
 		super();
 	}
 
-	public CustomerAccount(String accountID, String customerName) {
+	public CustomerAccount(Long accountID, String customerName) {
 		this.accountID = accountID;
 		this.customerName = customerName;
 	}
 
-	public CustomerAccount(String accountID, String customerName, Double initialCredit) {
+	public CustomerAccount(Long accountID, String customerName, Double initialCredit) {
 		super();
 		this.accountID = accountID;
 		this.customerName = customerName;
 		this.initialCredit = initialCredit;
 	}
 
-	public String getAccountID() {
+	public Long getAccountID() {
 		return accountID;
 	}
 
-	public void setAccountID(String accountID) {
+	public void setAccountID(Long accountID) {
 		this.accountID = accountID;
 	}
 

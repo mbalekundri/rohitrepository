@@ -1,0 +1,14 @@
+No static final string constants for reused strings (SpringBootPaymentsAppTests:27, SpringBootPaymentsAppTests:40) [Done]
+- Poor unit test quality. Only full end to end tests. Just sends 2 basic rest requests. Didn't use AssertTrue (SpringBootPaymentsAppTests:46) [AssertEquals Done already]
+- Controllers didnt need testing, services mostly did. But there are no isolated unit tests for them. [In-Progress]
+- Autowired services are not final 
+- Explicit diamond operator arguments (AccountController:56,68,84 etc) [???]
+- Bad practice of loggers. Not self explaining, just random "method name" logs. (AccountController:54,55 etc) [Done]
+- String concetanation in loggers. No string formatter. [
+- String accountId, instead of a numeric one
+- Poor quality javadocs. (AccountController:62,74,75,90,91 etc) 
+- Identical, no self explaining custom exceptions
+- Unused constructors (CustomerAccount) and methods in many places
+- Using synchronized on a non-final variable (CustomerAccountDAO:142)
+- Using synchronized in a getter ? (CustomerAccountDAO:142)
+- Unnecessary assigning a map to an arraylist, and in a bad way (CustomerAccountDAO:144)
